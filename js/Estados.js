@@ -67,35 +67,35 @@ var Estados=[
 	Cercanos:[{sitio:2,dist:30,tiempo:}]},
 	{
 	Nombre:"Neiva",
-	center:{lat:3.0363524lng:-75.4369235 }, 
+	center:{lat:3.0363524, lng:-75.4369235 }, 
 	Cercanos:[{  }]},
 	{
 	Nombre:"Rioacha",
-	center:{lat:11.5344826lng:-72.932166 }, 
+	center:{lat:11.5344826, lng:-72.932166 }, 
 	Cercanos:[{  }]},
 	{
 	Nombre:"Santa Marta",
-	center:{lat:11.0865488lng:-74.0440963 }, 
+	center:{lat:11.0865488, lng:-74.0440963 }, 
 	Cercanos:[{  }]},
 	{
 	Nombre:"Villavicencio",
-	center:{lat:4.1113172lng:-73.6085559 }, 
+	center:{lat:4.1113172, lng:-73.6085559 }, 
 	Cercanos:[{  }]},
 	{
 	Nombre:"Pasto",
-	center:{lat:1.2135683lng:-77.2947321 }, 
+	center:{lat:1.2135683, lng:-77.2947321 }, 
 	Cercanos:[{  }]},
 	{
 	Nombre:"Cucuta",
-	center:{lat:8.0781471lng:-72.617279 }, 
+	center:{lat:8.0781471, lng:-72.617279 }, 
 	Cercanos:[{  }]},
 	{
 	Nombre:"Mocoa",
-	center:{lat:1.1523513lng:-76.6554324 }, 
+	center:{lat:1.1523513, lng:-76.6554324 }, 
 	Cercanos:[{  }]},
 	{
 	Nombre:"Armenia",
-	center:{lat:4.4915063,lng:-75.7848234 }, 
+	center:{lat:4.4915063, lng:-75.7848234 }, 
 	Cercanos:[{  }]},
 	{
 	Nombre:"Pereira",
