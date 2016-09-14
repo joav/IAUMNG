@@ -1,15 +1,277 @@
 <!DOCTYPE html>
+
 <html>
+
 <head>
-	<title>Nodos</title>
-	<link rel="stylesheet" type="text/css" href="css/Estilo.css">
+	
+<title>Nodos</title>
+
+<link rel="stylesheet" type="text/css" href="css/Estilo.css">
+
 </head>
+
+
+
 <body>
-	<table id="Puzzle"></table>
-	<script type="text/javascript" src="Nodo.js"></script>
-	<script type="text/javascript" src="Cola.js"></script>
-	<script type="text/javascript" src="Pila.js"></script>
-	<script type="text/javascript" src="js/Busquedas.js"></script>
-	<script type="text/javascript" src="js/nodos prueba.js"></script>
+	
+<label id="tamaño">Tamaño: </label> 
+<select id="seleccion" onchange="tamanoTabla()" >
+	<option 
+	value="3">3X3</option>
+	<option 
+	value="4">4X4</option>
+	<option 
+	value="5">5X5</option>
+	<option 
+	value="6">6X6</option>
+	<option 
+	value="7">7X7</option>
+	<option 
+	value="8">8X8</option>
+	<option 
+	value="9">9X9</option>
+
+</select>
+
+<label >Tipo de busqueda: </label> 
+<select id="Busqueda" onChange="realizar()">
+	<option value="">-----------</option>
+    <option 
+	value="Anchura">anchura</option>
+	<option 
+	value="Profundidad">profundidad</option>
+	<option 
+	value="Profundidad Iterativa">profundidad iterativa</option>
+	<option 
+	value="Casillas Cerradas">casillas cerradas</option>
+	<option 
+	value="Manhatam">manhatam</option>
+</select>
+
+<br>
+<div id="tableros">
+<div id="estInicial" class="tablero">
+</div>
+
+<div id="estFinal" class="tablero">
+</div>
+</div>
+<script type="text/javascript">
+	var tam=3;
+	var matInicial=[[1,2,3],[4,5,6],[7,8,0]], matFinal=[[1,2,3],[4,5,6],[7,8,0]];
+	var pos0i={x:2,y:2},pos0f={x:2,y:2};
+	function encontrarFicha(ficha,tablero){
+		for(var i=0;i<tam;i++){
+			for(var j=0;j<tam;j++){
+				if(tablero==="estInicial"){
+					if(matInicial[i][j]==ficha)
+						return {x:j,y:i};
+				}
+				
+				if(tablero==="estFinal"){
+					if(matFinal[i][j]==ficha)
+						return {x:j,y:i};
+				}
+			}
+		}
+	}
+	function arriba(div,inicio){
+		var movin=inicio+2.096;
+		var mov=div.style.bottom.indexOf("px");
+		var text=div.style.bottom.substring(0,mov);
+		mov=parseFloat(text);
+		mov=mov+2.096;
+		if(movin<106.896){
+			div.style.bottom=""+mov+"px";
+			setTimeout(arriba,10,div,movin);
+		}
+	}
+	function abajo(div,inicio){
+		var movin=inicio+2.096;
+		var mov=div.style.bottom.indexOf("px");
+		var text=div.style.bottom.substring(0,mov);
+		mov=parseFloat(text);
+		mov=mov-2.096;
+		if(movin<106.896){
+			div.style.bottom=""+mov+"px";
+			setTimeout(abajo,10,div,movin);
+		}
+	}
+	function izquierda(div,inicio){
+		var movin=inicio+2.096;
+		var mov=div.style.left.indexOf("px");
+		var text=div.style.left.substring(0,mov);
+		mov=parseFloat(text);
+		mov=mov-2.096;
+		if(movin<106.896){
+			div.style.left=""+mov+"px";
+			setTimeout(izquierda,10,div,movin);
+		}
+	}
+	function derecha(div,inicio){
+		var movin=inicio+2.096;
+		var mov=div.style.left.indexOf("px");
+		var text=div.style.left.substring(0,mov);
+		mov=parseFloat(text);
+		mov=mov+2.096;
+		if(movin<106.896){
+			div.style.left=""+mov+"px";
+			setTimeout(derecha,10,div,movin);
+		}
+	}
+	function moverFicha(){
+		var pos=encontrarFicha(this.id,this.parentNode.id);
+		if(this.parentNode.id==="estInicial"){
+			if(pos.x+1==pos0i.x){
+				matInicial[pos0i.y][pos0i.x]=parseInt(this.id);
+				matInicial[pos.y][pos.x]=0;
+				pos0i.x=pos.x;
+				derecha(this,0);
+			}
+			else{
+				if(pos.y+1==pos0i.y){
+					matInicial[pos0i.y][pos0i.x]=parseInt(this.id);
+					matInicial[pos.y][pos.x]=0;
+					pos0i.y=pos.y;
+					abajo(this,0);
+				}
+				else{
+					if(pos.x-1==pos0i.x){
+						matInicial[pos0i.y][pos0i.x]=parseInt(this.id);
+						matInicial[pos.y][pos.x]=0;
+						pos0i.x=pos.x;
+						izquierda(this,0);
+					}
+					else{
+						if(pos.y-1==pos0i.y){
+							matInicial[pos0i.y][pos0i.x]=parseInt(this.id);
+							matInicial[pos.y][pos.x]=0;
+							pos0i.y=pos.y;
+							arriba(this,0);
+						}
+					}
+				}
+			}
+		}
+		if(this.parentNode.id==="estFinal"){
+			if(pos.x+1==pos0f.x){
+				matFinal[pos0f.y][pos0f.x]=parseInt(this.id);
+				matFinal[pos.y][pos.x]=0;
+				pos0f.x=pos.x;
+				derecha(this,0);
+			}
+			else{
+				if(pos.y+1==pos0f.y){
+					matFinal[pos0f.y][pos0f.x]=parseInt(this.id);
+					matFinal[pos.y][pos.x]=0;
+					pos0f.y=pos.y;
+					abajo(this,0);
+				}
+				else{
+					if(pos.x-1==pos0f.x){
+						matFinal[pos0f.y][pos0f.x]=parseInt(this.id);
+						matFinal[pos.y][pos.x]=0;
+						pos0f.x=pos.x;
+						izquierda(this,0);
+					}
+					else{
+						if(pos.y-1==pos0f.y){
+							matFinal[pos0f.y][pos0f.x]=parseInt(this.id);
+							matFinal[pos.y][pos.x]=0;
+							pos0f.y=pos.y;
+							arriba(this,0);
+						}
+					}
+				}
+			}
+		}
+	}
+	function crearFichas(){
+		var tab=document.getElementsByClassName("tablero");
+		var div,divl,iterador=1;
+		matInicial=new Array(tam);
+		matFinal=new Array(tam);
+		for(var i=0;i<tam;i++){
+			matInicial[i]=new Array(tam);
+			matFinal[i]=new Array(tam);
+		}
+		
+		for(var i=0;i<tam;i++){
+			for(var j=0;j<tam;j++){
+				matInicial[i][j]=iterador;
+				matFinal[i][j]=iterador;
+				iterador++;
+			}
+		}
+		matInicial[tam-1][tam-1]=0;
+		matFinal[tam-1][tam-1]=0;
+		pos0i={x:tam-1,y:tam-1};
+		pos0f={x:tam-1,y:tam-1};
+		if(tab[0].hasChildNodes()){
+			divl=tab[0].getElementsByTagName("div").length;
+			if(divl){
+				for(var i=0;i<divl;i++){
+					tab[0].removeChild(tab[0].childNodes[0]);
+					tab[1].removeChild(tab[1].childNodes[0]);
+				}
+				divl=tab[0].getElementsByTagName("div").length;
+				if(divl){
+					tab[0].removeChild(tab[0].childNodes[0]);
+					tab[1].removeChild(tab[1].childNodes[0]);
+				}
+			}
+		}
+		var pix=tam*100+tam*6;
+		tab[0].style.width=""+pix+"px";
+		tab[1].style.width=""+pix+"px";
+		for(var j=0;j<2;j++){
+			for(var i=0;i<(tam*tam)-1;i++){
+				div=document.createElement("div");
+				div.className="ficha";
+				div.id=i+1;
+				tab[j].appendChild(div);
+				div.innerHTML=i+1;
+				div.onclick=moverFicha;
+				div.style.position="relative";
+				div.style.bottom="0px";
+				div.style.left="0px";
+			}
+		}
+	}
+	crearFichas();
+</script>
+
+<script type="text/javascript" src="js/Nodo.js"></script>
+	
+<script type="text/javascript" >
+function tamanoTabla(){
+	var sele=document.getElementById("seleccion");
+	tam= sele.options[sele.selectedIndex].value;
+	crearFichas();
+}</script>
+	
+<script type="text/javascript" src="js/Cola.js"></script>
+	
+<script type="text/javascript" src="js/Pila.js"></script>
+
+<script type="text/javascript" src="js/Busquedas.js"></script>
+	
+<script type="text/javascript" src="js/nodos prueba.js"></script>
+
+<script type="text/javascript">
+function realizar()
+{
+	var sele=document.getElementById("Busqueda");
+	var op= sele.options[sele.selectedIndex].value;
+	var pasos;
+	if(op==="Anchura")
+	{
+		pasos=anchura(matInicial,matFinal,tam,pintarPuzzle);
+		console.log(moveToString(pasos));
+	}
+}
+</script>
+
 </body>
+
 </html>

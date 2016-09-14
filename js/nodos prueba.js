@@ -20,8 +20,8 @@ function pintarPuzzle(tam,mat){
 }
 
 function encontrarPosicion(mat){
-	for(var i=0;i<3;i++){
-		for(var j=0;j<3;j++){
+	for(var i=0;i<mat.length;i++){
+		for(var j=0;j<mat.length;j++){
 			if(mat[i][j]==0)
 				return {x:j,y:i};
 		}
@@ -29,9 +29,9 @@ function encontrarPosicion(mat){
 }
 
 function isFinalState(mat){
-	for(var i=0;i<3;i++){
-		for(var j=0;j<3;j++){
-			if(mat[i][j]!=final[i][j])
+	for(var i=0;i<mat.length;i++){
+		for(var j=0;j<mat.length;j++){
+			if(mat[i][j]!=matFinal[i][j])
 				return false;
 		}
 	}
@@ -147,7 +147,3 @@ function moveToString(mov){
 	return pasos;
 }
 
-var mat=[[4,1,2],[0,8,7],[6,3,5]];
-var final=[[1,2,3],[4,5,6],[7,8,0]];
-var pasos=anchura(mat,final,3,pintarPuzzle);
-console.log(moveToString(pasos));
