@@ -44,8 +44,6 @@ function anchura(inicial, final, tam,pintarPuzzle)
 	while(nodaux!=null){
 		pasos[i]=nodaux.Operacion;
 		i++;
-
-		pintarPuzzle(tam,nodaux.State);
 		
 		nodaux=nodaux.sig;
 	}
