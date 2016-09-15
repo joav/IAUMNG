@@ -1,5 +1,5 @@
 var tam=3;
-
+var profMax=50;
 var pasos=null;
 var matInicial=[[1,2,3],[4,5,6],[7,8,0]], matFinal=[[1,2,3],[4,5,6],[7,8,0]];
 var pos0i={x:2,y:2},pos0f={x:2,y:2};

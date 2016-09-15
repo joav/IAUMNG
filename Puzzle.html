@@ -43,11 +43,10 @@
 			<option 
 			value="Profundidad Iterativa">profundidad iterativa</option>
 			<option 
-			value="Casillas Cerradas">casillas cerradas</option>
+			value="Casillas Erradas">casillas erradas</option>
 			<option 
 			value="Manhatam">manhatam</option>
 		</select>
-
 		<br>
         <pre>  Estado Inicial                                   Estado Final</pre>
 		<div id="tableros">
@@ -85,12 +84,41 @@
 		<script type="text/javascript">
             function realizar()
             {
+				pasos=null;
+				iPasos=1;
                 var sele=document.getElementById("Busqueda");
                 var op= sele.options[sele.selectedIndex].value;
                 if(op==="Anchura")
                 {
                     pasos=anchura(matInicial,matFinal,tam,pintarPuzzle);
                     alert("Encontrado por anchura");
+                }
+				 if(op==="Profundidad")
+                {
+                    pasos=profundidad(matInicial,matFinal,tam,pintarPuzzle);
+                    alert("Encontrado por profundidad");
+                }
+				if(op==="Profundidad Iterativa")
+                {
+					var prof=prompt("Profundidad a iterar");
+					while(isNaN(prof)){
+						alert("Escriba un numero entero por favor");
+						prof=prompt("Profundidad a iterar");
+					}
+                    pasos=profundidadI(matInicial,matFinal,tam,pintarPuzzle,prof);
+					if(pasos!=null)
+	                    alert("Encontrado por profundidad iterativa");
+                }
+				if(op==="Casillas Erradas")
+                {
+                    pasos=casillasErradas(matInicial,matFinal,tam,pintarPuzzle);
+					if(pasos!=null)
+                    	alert("Encontrado por Heurística de casillas erradas");
+                }
+				if(op==="Manhatam")
+                {
+                    pasos=manhatam(matInicial,matFinal,tam,pintarPuzzle);
+                    alert("Encontrado por Manhatam");
                 }
             }
 		</script>
