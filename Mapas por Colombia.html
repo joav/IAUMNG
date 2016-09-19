@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Mapas Por Colombia</title>
+		<script type="text/javascript" src="js/Estados.js"></script>
+	</head>
+	<body>
+		<label>Ingrese su presupuesto  </label><input type="number" value="100000"/>
+		<label>Ciudad Inicial</label><select id="inicial"></select>
+		<label>Ciudad Destino</label><select id="final"></select><br/>
+		<label>Calcular Ruta:  </label><select id="tipoBusqueda">
+			<option value="Anchura">Anchura</option>
+			<option value="Profuntidad">Profundidad</option>
+			<option value="ProfIterativa">Profundidad Iterativa</option>
+			<option value="Coste">Coste Uniforme</option>
+			<option value="A asterisco">A asterisco</option>
+			<option value="Voraz">Voraz</option>
+		</select>
+		<div id="Mapa" style="width:1000px; height:500px; background-color:black;"></div>
+		<script type="text/javascript">
+			function llenarCiudades(lista){
+				var inicial=document.getElementById(lista);
+				var option;
+				var texto;
+				for(var i=0;i<Estados.length;i++){
+					option=document.createElement("option");
+					option.value=i;
+					texto=document.createTextNode(""+i+" "+Estados[i].Nombre);
+					option.appendChild(texto);
+					inicial.appendChild(option);
+				}
+			}
+			llenarCiudades("inicial");
+			llenarCiudades("final");
+		</script>
+	</body>
+</html>
